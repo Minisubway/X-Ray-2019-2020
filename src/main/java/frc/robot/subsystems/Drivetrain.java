@@ -158,7 +158,7 @@ public class Drivetrain extends SubsystemBase {
       pigeon = new PigeonIMU(RobotContainer.cargoMech.cargoBottomSRX);
     } else{
       pigeon = null;
-    }
+    } 
     
     coastCmd = new CoastMode(RobotContainer.drive);
   }
@@ -172,13 +172,13 @@ public class Drivetrain extends SubsystemBase {
     //Get updated yaw rates
     RobotContainer.drive.pigeon.getRawGyro(RobotContainer.drive.xyz_dps);
 
-    if (RobotContainer.elevator.getPosition() > Elevator.posCargoL2){ //If elevator above cargo2, move to coast
+    /*if (RobotContainer.elevator.getPosition() > Elevator.posCargoL2){ //If elevator above cargo2, move to coast
       if (isBrake){ //only start it if we are in brakeMode.
         coastCmd.schedule();
       }
     } else if (!coastCmd.isFinished()){//If elevator below and coastCmd is running, stop it.
       coastCmd.cancel();
-    }
+    } */
   }
 
   public void setMotionMagicParams(double maxVel, double maxAccel){
@@ -233,8 +233,7 @@ public class Drivetrain extends SubsystemBase {
   public void brakeMode(){
     isBrake = true;
     leftFrontMotor.setIdleMode(IdleMode.kBrake);
-    leftMiddleMotor.setIdleMode(IdleMode.kCoast
-    );
+    leftMiddleMotor.setIdleMode(IdleMode.kCoast);
     leftRearMotor.setIdleMode(IdleMode.kBrake);
     rightFrontMotor.setIdleMode(IdleMode.kBrake);
     rightMiddleMotor.setIdleMode(IdleMode.kCoast);
@@ -248,7 +247,7 @@ public class Drivetrain extends SubsystemBase {
     leftRearMotor.setIdleMode(IdleMode.kCoast);
     rightFrontMotor.setIdleMode(IdleMode.kCoast);
     rightMiddleMotor.setIdleMode(IdleMode.kCoast);
-    rightRearMotor.setIdleMode(IdleMode.kCoast);
+    rightRearMotor.setIdleMode(IdleMode.kCoast); 
   }
 
   public void defaultIdleMode(){
@@ -381,7 +380,8 @@ public class Drivetrain extends SubsystemBase {
     double steerAdjust = 0;
     //Super easy drive straight code based on the Z yaw rate of the pigeon, just a P loop
     if (pigeon != null){
-      steerAdjust = xyz_dps[2] * RobotContainer.prefs.getNumber("D: Straight P", 0.05);
+      //steerAdjust = xyz_dps[2] * RobotContainer.prefs.getNumber("D: Straight P", 0.05);
+      arcadeDrive(speed, steerAdjust);
     }
     arcadeDrive(speed, steerAdjust);
   }

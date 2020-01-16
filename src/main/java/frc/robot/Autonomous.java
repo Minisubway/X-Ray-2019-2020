@@ -1,6 +1,6 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.util.Debugger;
 import frc.lib.util.SpectrumLogger;
 import frc.robot.commands.elevator.MMElevator;
@@ -8,8 +8,8 @@ import frc.robot.commands.elevator.MMElevator;
 public class Autonomous {
 
 	public static void init() {
-        Scheduler.getInstance().removeAll();
-		Scheduler.getInstance().enable();
+        //CommandScheduler.getInstance().cancelAll();
+		//Scheduler.getInstance().enable();
 		new MMElevator(RobotContainer.elevator).schedule(); //Force a new hold position at the begining of telop, should keep it at the right position.
         RobotContainer.visionLL.initialize();
 		Debugger.println("Auto Init");
@@ -18,11 +18,10 @@ public class Autonomous {
 
 	// Periodic method called roughly once every 20ms
 	public static void periodic() {
-		Scheduler.getInstance().run();
 	}
 
 	public static void cancel() {
-		Scheduler.getInstance().removeAll();
+		CommandScheduler.getInstance().cancelAll();
 		SpectrumLogger.getInstance().addEvent("System", "Auto Complete");
 		RobotContainer.pneumatics.compressor.start();
 	}

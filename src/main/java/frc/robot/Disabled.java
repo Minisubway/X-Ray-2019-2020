@@ -17,7 +17,7 @@ public class Disabled {
         Command a = new RumbleOff(RobotContainer.driverController, RobotContainer.opController);
         new DriveSpeed(0.0, RobotContainer.drive).schedule();
         a.schedule();
-        CommandScheduler.getInstance().cancelAll();;
+        //CommandScheduler.getInstance().cancelAll();
         a.cancel();
          //Do things if connected to FMS only, so when telop starts during a match but not during testing
         if (DriverStation.getInstance().isFMSAttached() || SmartDashboard.getBoolean("Drive/BRAKEMODE", true)){
@@ -28,8 +28,8 @@ public class Disabled {
 
     //Periodic method called roughly once every 20ms
     public static void periodic() {
-        Dashboard.dashboardFlash(); //Only flash when disabled, one less thing to send during telop
         CommandScheduler.getInstance().run();
+        Dashboard.dashboardFlash(); //Only flash when disabled, one less thing to send during telop
         /*if (HW.oi.isDriverButtonPushed()){
             Robot.photon.addAnimation("DriverButton", Animation.CYLON, Photon.Color.BLUE, Color.WHITE, 50, 5);
         }

@@ -12,8 +12,8 @@ import frc.robot.commands.elevator.MMElevator;
 public class Teleop {
 	
     public static void init() {
-        CommandScheduler.getInstance().cancelAll();
-        //new MMElevator(RobotContainer.elevator).schedule(); //Force a new hold position at the begining of telop, should keep it at the right position.
+        //CommandScheduler.getInstance().cancelAll();
+        new MMElevator(RobotContainer.elevator).schedule(); //Force a new hold position at the begining of telop, should keep it at the right position.
         RobotContainer.visionLL.initialize();
 
         //Do things if connected to FMS only, so when telop starts during a match but not during testing
@@ -23,7 +23,7 @@ public class Teleop {
     }
 
     public static void periodic() {
-        CommandScheduler.getInstance().run();
+        //CommandScheduler.getInstance().run();
     }
 
     public static void cancel() {

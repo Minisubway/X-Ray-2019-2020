@@ -38,7 +38,8 @@ public class Hatch extends SubsystemBase {
     }
     
     public boolean getHatchSW(){
-        return hatchSW.get();
+        //return hatchSW.get();
+        return false;
     }
     
     //Extend the eject cylinders
